@@ -1,0 +1,16 @@
+<resources>
+    <declare-styleable name="FlowLayout">
+        <attr name="elementSpacing" format="dimension"/>
+        <attr name="lineSpacing" format="dimension"/>
+        <attr name="flowDirection" format="enum">
+            <enum name="leftToRight" value="0"/>
+            <enum name="topDown" value="1"/>
+            <enum name="rightToLeft" value="2"/>
+            <enum name="bottomUp" value="3"/>
+        </attr>
+        <attr name="android:gravity"/>
+    </declare-styleable>
+    <declare-styleable name="FlowLayout_Layout">
+        <attr name="layout_breakLine" format="boolean"/>
+    </declare-styleable>
+</resources>
