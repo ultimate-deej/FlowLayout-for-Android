@@ -44,8 +44,8 @@ public class FlowLayout extends ViewGroup {
         final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         final int heightMode = MeasureSpec.getMode(heightMeasureSpec);
 
-        final int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        final int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        final int widthSize = widthMode == MeasureSpec.UNSPECIFIED ? Integer.MAX_VALUE : MeasureSpec.getSize(widthMeasureSpec);
+        final int heightSize = heightMode == MeasureSpec.UNSPECIFIED ? Integer.MAX_VALUE : MeasureSpec.getSize(heightMeasureSpec);
 
         final boolean isWrapContentWidth = widthMode != MeasureSpec.EXACTLY;
         final boolean isWrapContentHeight = heightMode != MeasureSpec.EXACTLY;
