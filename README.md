@@ -68,3 +68,7 @@ Same with gravity set fo *fill* and without gravity respectively:
 
 ![Fill](https://raw.github.com/ultimate-deej/FlowLayout-for-Android/master/screenshots/fill.png)
 ![No gravity](https://raw.github.com/ultimate-deej/FlowLayout-for-Android/master/screenshots/no-gravity.png)
+
+TODO
+----
+- Implement margins for child views
