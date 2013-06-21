@@ -44,8 +44,8 @@ public class FlowLayout extends ViewGroup {
         final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         final int heightMode = MeasureSpec.getMode(heightMeasureSpec);
 
-        final int widthSize = widthMode == MeasureSpec.UNSPECIFIED ? Integer.MAX_VALUE : MeasureSpec.getSize(widthMeasureSpec);
-        final int heightSize = heightMode == MeasureSpec.UNSPECIFIED ? Integer.MAX_VALUE : MeasureSpec.getSize(heightMeasureSpec);
+        final int widthSize = (widthMode == MeasureSpec.UNSPECIFIED ? Integer.MAX_VALUE : MeasureSpec.getSize(widthMeasureSpec)) - getPaddingLeft() - getPaddingRight();
+        final int heightSize = (heightMode == MeasureSpec.UNSPECIFIED ? Integer.MAX_VALUE : MeasureSpec.getSize(heightMeasureSpec)) - getPaddingTop() - getPaddingBottom();
 
         final boolean isWrapContentWidth = widthMode != MeasureSpec.EXACTLY;
         final boolean isWrapContentHeight = heightMode != MeasureSpec.EXACTLY;
@@ -127,9 +127,13 @@ public class FlowLayout extends ViewGroup {
         adjustDepths(lines, isWrapLength ? totalLength : lineLengthLimit);
 
         if (horizontal) {
-            this.setMeasuredDimension(isWrapContentWidth ? totalLength : widthSize, isWrapContentHeight ? totalThickness : heightSize);
+            this.setMeasuredDimension(
+                    (isWrapContentWidth ? totalLength : widthSize) + getPaddingLeft() + getPaddingRight(),
+                    (isWrapContentHeight ? totalThickness : heightSize) + getPaddingTop() + getPaddingBottom());
         } else {
-            this.setMeasuredDimension(isWrapContentWidth ? totalThickness : widthSize, isWrapContentHeight ? totalLength : heightSize);
+            this.setMeasuredDimension(
+                    (isWrapContentWidth ? totalThickness : widthSize) + getPaddingLeft() + getPaddingRight(),
+                    (isWrapContentHeight ? totalLength : heightSize) + getPaddingTop() + getPaddingBottom());
         }
     }
 
@@ -184,8 +188,8 @@ public class FlowLayout extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        int width = getMeasuredWidth();
-        int height = getMeasuredHeight();
+        int width = getMeasuredWidth() - getPaddingLeft() - getPaddingRight();
+        int height = getMeasuredHeight() - getPaddingTop() - getPaddingBottom();
         for (int i = 0, childCount = getChildCount(); i < childCount; i++) {
             View child = getChildAt(i);
             if (child.getVisibility() != GONE) {
@@ -224,7 +228,7 @@ public class FlowLayout extends ViewGroup {
                 break;
         }
 
-        child.layout(left, top, right, bottom);
+        child.layout(left + getPaddingLeft(), top + getPaddingTop(), right + getPaddingLeft(), bottom + getPaddingTop());
     }
 
     @Override
