@@ -20,6 +20,7 @@ public class FlowLayout extends ViewGroup {
     private int mElementSpacing;
     private int mLineSpacing;
     private int mFlowDirection;
+    private int mMaxLines;
 
     public FlowLayout(Context context) {
         super(context);
@@ -67,6 +68,7 @@ public class FlowLayout extends ViewGroup {
         int linePos = 0;
 
         int totalLength = 0;
+        int totalThickness = 0;
 
         // temporary list of lines, used for adjusting children positions according to gravity
         ArrayList<Pair<ArrayList<LayoutParams>, Integer>> lines = new ArrayList<Pair<ArrayList<LayoutParams>, Integer>>();
@@ -114,6 +116,10 @@ public class FlowLayout extends ViewGroup {
                 lineThickness = Math.max(lineThickness, childThickness);
             }
 
+            if (mMaxLines == 0 || (mMaxLines > 0 && lines.size() <= mMaxLines)) {
+                totalThickness = linePos + lineThickness;
+            }
+
             childLayoutParams.mPos = linePos;
             currentLine.add(childLayoutParams);
 
@@ -122,7 +128,6 @@ public class FlowLayout extends ViewGroup {
         lines.add(new Pair<ArrayList<LayoutParams>, Integer>(currentLine, lineLength));
 
         totalLength = Math.max(lineLength, totalLength);
-        int totalThickness = linePos + lineThickness;
 
         adjustDepths(lines, isWrapLength ? totalLength : lineLengthLimit);
 
@@ -258,6 +263,7 @@ public class FlowLayout extends ViewGroup {
             mLineSpacing = a.getDimensionPixelSize(R.styleable.FlowLayout_lineSpacing, 0);
             mGravity = a.getInt(R.styleable.FlowLayout_android_gravity, Gravity.NO_GRAVITY);
             mFlowDirection = a.getInt(R.styleable.FlowLayout_flowDirection, LEFT_TO_RIGHT);
+            mMaxLines = a.getInt(R.styleable.FlowLayout_android_maxLines, 0);
         } finally {
             a.recycle();
         }
