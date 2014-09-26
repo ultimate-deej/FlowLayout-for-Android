@@ -15,6 +15,8 @@ You can also optionally specify **gravity** for layout. *Center* and *fill* are 
 
 Layout child can force starting a new line if **layout_breakLine** attribute set to *true*.
 
+To limit max number of lines use **maxLines** attribute. Default is 0.
+
 Usage example
 -------------
 ```xml
@@ -24,6 +26,7 @@ Usage example
                                 app:flowDirection="leftToRight"
                                 app:elementSpacing="4dp"
                                 app:lineSpacing="16dp"
+                                android:maxLines="50"
                                 android:gravity="center"
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent">
