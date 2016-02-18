@@ -2,6 +2,15 @@ FlowLayout for Android
 ======================
 This is a FlowLayout implementation for Android.
 
+Important notice!
+-----------------
+
+I once needed it. Now its job done long ago.
+
+It works. But it lacks some features, it's not on jcenter or maven central, and design of the library can be better overall.
+
+It is not maintained.
+
 Features
 --------
 
